@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="M:\Documents\s3FileManager\venv"
+VIRTUAL_ENV="C:\Users\davparker\PycharmProjects\s3FileManager\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

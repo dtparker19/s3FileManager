@@ -8,19 +8,19 @@ from object_wrapper import ObjectWrapper
 
 file_list_column = [
     [
-        sg.Text("AWS S3 Bucket", size=(15, 1), key="bucket_name"),
-        sg.In(size=(50, 1), enable_events=True, key="-FOLDER-"),
+        sg.Text("s3://healthqx-chc-cert-analytics-cloud/hqxmt/client/ibc/202109_all_01_006", size=(15, 1), key="bucket_name"),
+        sg.In(size=(32, 1), enable_events=True, key="-FOLDER-"),
         sg.Button("Browse", size=(5, 1), key="-BROWSE-"),
     ],
     [
         sg.Listbox(
-            values=[], enable_events=True, size=(40, 20), key="-FILE LIST-"
+            values=[], enable_events=True, size=(32, 20), key="-FILE LIST-"
         )
     ],
 ]
 # For now will only show the name of the file that was chosen
 multi_line_column = [
-    [sg.Multiline("Choose config file:", size=(60, 50), key="-MULTILINE-")],
+    [sg.Multiline("Choose config file:", size=(40, 35), key="-MULTILINE-")],
     [sg.Text(size=(40, 1), key="-TOUT-")],
     [sg.Image(key="-IMAGE-")],
 ]
