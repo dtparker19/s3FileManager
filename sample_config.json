@@ -1,0 +1,54 @@
+com.changehealthcare.hqx {
+  spark{
+  cluster {
+      app.name = "HQX_ANALYTICS_PRE_PROCESSOR"
+      bucket.name= "healthqx-chc-cert-analytics-cloud"
+      path.prefix="hqxmt/client/ibc/202109_all_01_006"
+      file.parentbucket="member,pcp,provider,enrollment,claimline,rxclaim,claimheader"
+      bucket.region= "us-east-1"
+      hqx.raw.input.file.format ="s3selectCSV"
+      hqx.raw.output.file.format ="parquet"
+      hqx.processing.phase ="raw"
+	  hqx.file.protocol = "s3"
+      hqx.processing.raw.input.prefix.path = "input"
+      hqx.processing.raw.output.prefix.path = "output"
+	  hqx.processing.rejected.output.prefix.path = "rejected"
+	  hqx.raw.file.delimiter ="\t"
+      hqx.config.path = "config"
+      hqx.control.data.path ="controldata"
+	  hqx.control.data.file ="controldatapoint.csv"
+	  hqx.header="false"
+	  MERGE_SCHEMA="true"
+	  mergeSchema="true"
+      hqx.multiline.escape = true
+	  hqx.raw.repartition=10
+	  hqx.per.partition.member.count = 500000
+	  hqx.client.raw.date.pattern = "yyyy/MM/dd"
+	  hqx.parquet.date.pattern = "MM/dd/yyyy"
+    },
+    local {
+          app.name = "HQX_ANALYTICS_PRE_PROCESSOR"
+          bucket.name= "C:"
+          path.prefix= "Users\\Public\\HQX\\InputFiles"
+          file.parentbucket="claim"
+          file.refbucket="TypeOfBillMap"
+          bucket.region= "us-east-1"
+          hqx.raw.input.file.format ="csv"
+          hqx.input.input.file.format ="csv"
+          hqx.raw.output.file.format ="csv"
+          hqx.input.output.file.format ="csv"
+          hqx.processing.phase ="raw"
+          hqx.processing.raw.input.prefix.path = "input"
+          hqx.processing.raw.output.prefix.path = "output"
+          hqx.processing.input.input.prefix.path = "input"
+          hqx.processing.input.output.prefix.path = "output"
+          hqx.processing.rejected.output.prefix.path = "rejected"
+          hqx.raw.file.delimiter ="\t"
+          hqx.config.path = "config"
+          hqx.metric.file= "controldata/controldata.parque"
+          hqx.client.raw.date.pattern = "yyyy/MM/dd"
+          hqx.parquet.date.pattern = "MM/dd/yyyy"
+    }
+  }
+  deploy = "cluster"
+}

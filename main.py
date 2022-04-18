@@ -1,5 +1,8 @@
 import PySimpleGUI as sg
 import os.path
+import json
+import boto3
+
 from object_wrapper import ObjectWrapper
 
 
@@ -32,13 +35,21 @@ layout = [
         sg.Column(multi_line_column),
     ]
 ]
-# layout = [ [sg.Text('Enter your name')],       # Text input
-#            [sg.InputText()],                   # Input box
-#            [sg.Button('Ok'), sg.Button('Cancel')] ] # Buttons
-
-
 sg.theme('Dark Blue 3')  # Add a touch of color
 window = sg.Window('Demo', layout)  # Create the Window
+
+def loadFile():
+    if (1 == 0 ):
+        s3_client = boto3.client('s3')
+        s3_object = s3_client.get_object(Bucket='healthqx-chc-cert-analytics-cloud\hqxmt\client\ibc\202109_all_01_006\config',Key='application_input.conf')
+        s3Obj = ObjectWrapper(s3_object)
+        data = s3Obj
+    else:
+        with open('sample_config.json') as f:
+
+            data = json.load(f)
+            print(data)
+
 
 # Run the Event Loop
 while True:
@@ -61,6 +72,8 @@ while True:
                and f.lower().endswith((".json", ".config"))
         ]
         window["-FILE LIST-"].update(fnames)
+    elif event == "-BROWSE-":
+        loadFile()
     elif event == "-LOA-":
         bucket_name = values["FOLDER"]
         ObjectWrapper.set_bucket_name(bucket_name)
