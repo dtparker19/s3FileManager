@@ -1,10 +1,12 @@
+
 import PySimpleGUI as sg
 import os.path
 import json
 import boto3
 
 from object_wrapper import ObjectWrapper
-
+import parseDict
+import json
 
 # First the window layout in 2 columns
 
@@ -50,7 +52,10 @@ def loadFile():
             data = json.load(f)
             print(data)
 
-
+def loadFile():
+    with open('path_to_file/person.json', 'r') as f:
+        parseDict.regex_kv_pairs(f)
+        #data = json.load(f)
 # Run the Event Loop
 while True:
     event, values = window.read()
